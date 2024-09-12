@@ -1,16 +1,28 @@
 <script setup>
 import { ref } from "vue";
-let list = ref(["raz", "dwa", "trzy"]);
 let element = ref("");
+let list = ref(null);
+
+
+fetch("http://localhost:8080/elements")
+    .then((response) => response.json())
+    .then((data) => {list.value = data});
+
 
 function addElement() {
   if (element.value == "") return;
+  fetch("http://localhost:8080/elements", {
+    method: "POST",
+    body: element.value,
+  });
   list.value.push(element.value);
   element.value = "";
 }
 
 function removeElement(index) {
-  console.log(index);
+  fetch("http://localhost:8080/elements/" + index,  {
+    method: "DELETE",
+  });
   list.value.splice(index, 1);
 }
 </script>
