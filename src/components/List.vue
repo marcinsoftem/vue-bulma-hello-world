@@ -3,7 +3,7 @@ import { ref, useTemplateRef, onMounted, onUpdated } from "vue";
 let element = ref("");
 let list = ref(null);
 const elementInput = useTemplateRef("elementInput");
-const ELEMENTS_URL = "http://dev.wszib.edu.pl/elements";
+const ELEMENTS_URL = "https://dev.wszib.edu.pl/elements";
 
 onMounted(() => {
   getElements();
@@ -19,7 +19,11 @@ function setElementInputFocus() {
 }
 
 function getElements() {
-  fetch(ELEMENTS_URL)
+  fetch(ELEMENTS_URL, {
+    headers: {
+      // "Access-Control-Allow-Origin": "*",
+    }
+  })
       .then((response) => response.json())
       .then((data) => {
         list.value = data
@@ -34,6 +38,9 @@ function addElement() {
   if (element.value == "") return;
   fetch(ELEMENTS_URL, {
     method: "POST",
+    headers: {
+      // "Access-Control-Allow-Origin": "*",
+    },
     body: element.value,
   }).then(function (response) {
     if (response.ok) {
@@ -49,6 +56,9 @@ function addElement() {
 function removeElement(index) {
   fetch(ELEMENTS_URL +"/" + index,  {
     method: "DELETE",
+    headers: {
+      // "Access-Control-Allow-Origin": "*",
+    }
   }).then(function (response) {
     if (response.ok) {
       console.log("Deleting element: " + list.value[index]);
