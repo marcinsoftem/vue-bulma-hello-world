@@ -47,7 +47,7 @@ function addElement() {
 }
 
 function removeElement(index) {
-  fetch(ELEMENTS_URL + index,  {
+  fetch(ELEMENTS_URL +"/" + index,  {
     method: "DELETE",
   }).then(function (response) {
     if (response.ok) {
