@@ -3,6 +3,7 @@ import { ref, useTemplateRef, onMounted, onUpdated } from "vue";
 let element = ref("");
 let list = ref(null);
 const elementInput = useTemplateRef("elementInput");
+const ELEMENTS_URL = "http://localhost:8080/elements";
 
 onMounted(() => {
   getElements();
@@ -18,7 +19,7 @@ function setElementInputFocus() {
 }
 
 function getElements() {
-  fetch("http://localhost:8080/elements")
+  fetch(ELEMENTS_URL)
       .then((response) => response.json())
       .then((data) => {
         list.value = data
@@ -31,7 +32,7 @@ function getElements() {
 
 function addElement() {
   if (element.value == "") return;
-  fetch("http://localhost:8080/elements", {
+  fetch(ELEMENTS_URL, {
     method: "POST",
     body: element.value,
   }).then(function (response) {
@@ -46,7 +47,7 @@ function addElement() {
 }
 
 function removeElement(index) {
-  fetch("http://localhost:8080/elements/" + index,  {
+  fetch(ELEMENTS_URL + index,  {
     method: "DELETE",
   }).then(function (response) {
     if (response.ok) {
