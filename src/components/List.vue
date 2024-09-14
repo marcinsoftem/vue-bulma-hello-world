@@ -3,7 +3,7 @@ import { ref, useTemplateRef, onMounted, onUpdated } from "vue";
 let element = ref("");
 let list = ref(null);
 const elementInput = useTemplateRef("elementInput");
-const ELEMENTS_URL = "http://localhost:8080/elements";
+const ELEMENTS_URL = "http://dev.wszib.edu.pl/elements";
 
 onMounted(() => {
   getElements();
