@@ -1,10 +1,11 @@
 {
-  "name": "vue-bulma-hello-world",
-  "version": "0.0.0",
+  "name": "simple-list",
+  "version": "0.0.1",
   "private": true,
   "type": "module",
   "scripts": {
     "dev": "vite",
+    "dev-docker-dmz": "vite --mode dev-docker-dmz",
     "build": "vite build",
     "preview": "vite preview"
   },
